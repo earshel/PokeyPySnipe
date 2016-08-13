@@ -1,0 +1,22 @@
+.collection .collection-item.avatar img {
+    width: 64px;
+    height: auto;
+    float: left;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.collection .collection-item.avatar {
+    padding-left: 20px;
+    width: 50%;
+    text-align: left;
+    display: inline-block;
+}
+
+.collection .collection-item.avatar .title {
+    font-weight: bold;
+}
+
+form input[type=text] {
+    width: 50%;
+}
