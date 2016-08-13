@@ -1,3 +1,88 @@
+input[type=text],
+select {
+    width: 15%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 10%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.main {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    height: 100%;
+}
+
+.square:hover {
+    transition: box-shadow .25s;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.square {
+    width: 110px;
+    height: 150px;
+    padding: 10px;
+    position: relative;
+    margin: 10px;
+    float: left;
+    border: 1px solid;
+    font-family: arial;
+    background: radial-gradient(ellipse at center, rgba(85, 26, 139, .4) 0, rgba(255, 255, 255, .18) 54%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 3px 50px 0 rgba(0, 0, 0, 0.08), 0 6px 10px 0 rgba(0, 0, 0, 0.09);
+}
+
+#all {
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+.inventory {
+    left: 5%;
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.topNav {
+    height: 30px;
+    width: 100%;
+    background-color: darkgreen;
+    position: absolute;
+    top: 10px;
+    font-size: 17px;
+    color: white;
+    padding-left: 50px;
+    line-height: 30px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
 .collection .collection-item.avatar img {
     width: 64px;
     height: auto;
