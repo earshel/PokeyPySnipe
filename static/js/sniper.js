@@ -10,9 +10,9 @@ $.ajax('static/pokemondata.json')
     });
 
 function loadSnipable() {
-    $.ajax('http://pokesniper.org/api.php')
+    $.ajax('http://pokesnipers.com/api/v1/pokemon.json')
         .then(function(data) {
-            data = $.parseJSON(data);
+            data = data.results;
             var collection = $('<ul class="collection"></ul>');
             data.forEach(function(element) {
                 var item = $('<li class="collection-item avatar"></li>');

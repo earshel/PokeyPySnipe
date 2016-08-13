@@ -16,6 +16,9 @@ Features
 - Rename Pokemon to include IV in name
 - See stats for your trainer, including capture rate and distance walked
 - Batch release and evolve Pokemon
+- Snipe pokemons at a given location
+- List snipable pokemons through pokesnipers.com
+- Click to snipe
 
 Requirements
 ------------
