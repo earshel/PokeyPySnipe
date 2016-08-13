@@ -1,0 +1,492 @@
+<html>
+
+<head>
+    <title>Pokey Manager</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <script type=text/javascript>
+        function updateStatus() {
+            document.getElementById('status').innerHTML = ('<center><font size=4 color=Orange><b>Attempting to snipe Pokemon. This may take some time.</center></font></b>');
+        }
+
+        function ucFirst(string) {
+            return string.substring(0, 1).toUpperCase() + string.substring(1).toLowerCase();
+        }
+        // attach handlers once iframe is loaded
+    </script>
+
+    <style>
+	
+    input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+			font-size: 12px;
+        }
+        
+        input[type=submit],
+        input[type=button],
+        button {
+            width: 160px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+			text-align:center;
+        }
+        
+        input[type=submit],
+        input[type=button],
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .main {
+            position: relative;
+            width: 200px;
+            margin: 0 auto;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            top: 100px;
+        }
+        
+        .square:hover {
+            transition: box-shadow .25s;
+            box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
+        .pokeSquare {}
+        
+        .square {
+            width: 230px;
+            height: 350px;
+            padding: 10px;
+            position: relative;
+            margin: 10px;
+            float: left;
+            border: 1px solid;
+            font-family: arial;
+            align: center;
+            background-color: white;
+            box-shadow: 0 3px 50px 0 rgba(0, 0, 0, 0.08), 0 6px 10px 0 rgba(0, 0, 0, 0.09);
+        }
+    }
+    #all {
+        width: 100%;
+        float: left;
+        text-align: center;
+    }
+    .inventory {
+        left: 5%;
+        width: 1260px;
+        top: 50px;
+        height: 100%;
+        margin: 0 auto;
+        border: 1px solid;
+        background-color: rgba(72, 72, 72, .1);
+        box-shadow: 0 3px 50px 0 rgba(0, 0, 0, 0.08), 0 6px 10px 0 rgba(0, 0, 0, 0.09);
+    }
+    .aboveInventory {
+        z-index: 99;
+        left: 5%;
+        width: 90%;
+        top: 50px;
+        position: absolute;
+        height: 100px margin: 0 auto;
+    }
+    .topNav {
+        height: 100px;
+        width: 100%;
+        background-color: darkgreen;
+        position: relative;
+        top: 10px;
+        font-size: 30px;
+        font-family: arial;
+        color: white;
+        display: table;
+    }
+    .topNavCenter {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+    p.center {
+        vertical-align: middle;
+        top: 10%;
+        color: black;
+        text-align: center;
+    }
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        
+        position: absolute;
+        /* Stay in place */
+        
+        z-index: 1;
+        /* Sit on top */
+        
+        top: 40%;
+        margin: 0 auto;
+        width: 800px;
+        /* Full width */
+        
+        height: 200px;
+        /* Full height */
+        
+        overflow: auto;
+        /* Enable scroll if needed */
+        
+        background-color: rgb(255, 255, 255, .5);
+        /* Fallback color */
+        
+        background-color: rgb(255, 255, 255, .5);
+        /* Black w/ opacity */
+    }
+	
+	progress, /* All HTML5 progress enabled browsers */
+progress[role] /* polyfill */ {
+
+    /* Turns off styling - not usually needed, but good to know. */
+    appearance: none; -
+    moz - appearance: none; -
+    webkit - appearance: none;
+
+    /* gets rid of default border in Firefox and Opera. */
+    border: none;
+
+    /* Needs to be in here for Safari polyfill so background images work as expected. */
+    background - size: auto;
+
+    /* Dimensions */
+    width: 400 px;
+    height: 10 px;
+
+}
+
+/* Polyfill */
+progress[role]: after {
+    background - image: none; /* removes default background from polyfill */
+}
+
+/* Ensure fallback text doesn't appear in polyfill */
+progress[role] strong {
+    display: none;
+}
+
+
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="static/js/materialize.min.js"></script>
+
+
+    <nav>
+        <div class="nav-wrapper  indigo lighten-2" style=" z-index:99;">
+            <a href="#" class="brand-logo center">PokeyPy Manager</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a href="/">Dashboard</a></li>
+				<li><a href="http://localhost:5100/snipe">Snipe</a></li>
+                <li><a href="/inventory">PokeManager</a></li>
+
+            </ul>
+        </div>
+    </nav>
+ 
+    <div class="aboveInventory" id="aboveInventory">
+        <br>
+        <Center>
+            <form action="/release" id="topForm">
+                <font face=arial size=3>Sort By:&nbsp;</font>
+                <select form="topForm" id="sortBy" name="sortBy" onchange="sortPokes()" style="text-align:center;width:150px;"> 
+			<option value="cp">Pokemon CP</option>
+			<option value="pokemon_name">Pokemon Name</option>
+			<option value="pokemon_id">Pokemon ID</option>
+			<option value="iv">Pokemon IV</option>
+			<option value="creation_time_ms">Recent</option>
+			<option value="favorite">Favorites</option>
+			
+			</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <input type="button" id="advFilter" onclick="document.getElementById('advFilterModal').style.display = 'block'" value="Advanced Filter">
+			 <input type="button" id="selectAll" onclick="selectAllPokes()" value="Select All">
+			 <a href="inventory?refresh=true"><button id="refresh" type="button" >Refresh Data</button></a>
+			 <br>
+			 <input type="hidden" id="pokeID" name="pokeID">
+			<input type=submit style="background-color:  #ff5c33;" value="Favorite Selected" name="action">&nbsp;
+			<input type=submit style="background-color:  #ff5c33;"  value="Release Selected" name="action">&nbsp;
+			<input type=submit style="background-color:  #ff5c33;"  value="Evolve Selected" name="action">&nbsp;
+			<input type=submit style="background-color:  #ff5c33;"  value="Rename Selected" name="action"> &nbsp;
+			<input type=submit style="background-color:  #ff5c33;"  value="PowerUp Selected" name="action">&nbsp;
+	
+				 </form>
+
+
+        </center>
+        <br>
+    </div>
+	
+    <div class="inventory" id="inventory">
+        <br><br><br><br><br><br>
+    </div>
+	
+    <div id="advFilterModal" class="modal">
+        <font style="margin-left:20px;" face=arial>CP Threshold <input value=0 style="margin-top:20px;margin-left:10px;width:100px;" id="cpThreshold">
+
+            <font style="margin-left:20px;" face=arial>IV Threshold (%)<input value=0 style="margin-top:20px;margin-left:10px;width:100px;" id="ivThreshold">
+
+                <font style="margin-left:20px;" face=arial>Pokemon Name <input style="margin-top:20px;margin-left:10px;width:100px;" id="pokemonName">
+                    <br>
+                    <center><button id="filter" type="button" onclick="sortPokes()">Filter Pokemon</button> <button id="closeModal" type="button" onclick="document.getElementById('advFilterModal').style='display:none;'">Cancel</button></center>
+    </div>
+
+
+    <script type="text/javascript">
+        <!--
+        var party = []
+
+        var selectedPokes = []
+
+
+        function loadJSON(path, success, error) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (success)
+                            success(JSON.parse(xhr.responseText));
+                    } else {
+                        if (error)
+                            error(xhr);
+                    }
+                }
+            };
+            xhr.open("GET", path, true);
+            xhr.send();
+        }
+
+        function sortByKey(array, key) {
+            if (key == 'cp' || key == 'iv' || key == 'creation_time_ms') {
+			
+                return array.sort(function(b, a) {
+                    var x = a[key];
+                    var y = b[key];
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                });
+            } else {
+                return array.sort(function(a, b) {
+                    var x = a[key];
+                    var y = b[key];
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+                });
+            }
+        }
+
+        function selectPoke(id) {
+
+            if (selectedPokes.indexOf(id.parentElement.parentElement.id) == -1) {
+                selectedPokes.push(id.parentElement.parentElement.id);
+                id.parentElement.parentElement.style.background = 'rgba(255,0,0,.1)';
+
+            } else {
+                selectedPokes.splice(selectedPokes.indexOf(id.parentElement.parentElement.id), 1);
+                id.parentElement.parentElement.style.background = 'rgba(255,255,255,1)';
+            }
+
+
+
+
+            for (var id in selectedPokes) {
+                //debug
+            }
+
+
+            //push selected pokemon to hidden text field for transmittal to python script
+            document.getElementById("pokeID").value = selectedPokes;
+
+
+
+        }
+
+        function sculpt(data) {
+
+            
+            party = data;
+
+            sortPokes();
+        }
+
+
+
+        //sort pokemon by id,pokemon_id,cp,stamina,stamina_max,move_1,move_2,etc.
+        function sortPokes() {
+			
+			selectedPokes = [];
+			document.getElementById("pokeID").value = selectedPokes; 
+			var squareCount = 0;
+            document.getElementById('advFilterModal').style.display = "none";
+            key = document.getElementById('sortBy').value;
+			var d = new Date();
+			var curTime = d.getTime()/1000; 
+			
+			if (parseInt(curTime) - parseInt(party[0].timeStamp) < 120){
+			key = party[0].sortBy;
+			document.getElementById('sortBy').value = key;
+			} else {}
+			
+            document.getElementById('inventory').innerHTML = origInventory;
+            sortByKey(party, key);
+
+            /*	SAMPLE POKEMON INFO FOR FORMATTING HELP
+			
+                #id: 2436312686824190668
+                #pokemon_id: EEVEE
+                #cp: 46
+                #stamina: 19
+                #stamina_max: 19
+                #move_1: TACKLE_FAST
+                #move_2: DIG
+                #height_m: 0.297532558441
+                #weight_kg: 8.24643802643
+                #individual_attack: 15
+                #individual_defense: 12
+                #individual_stamina: 9
+                #cp_multiplier: 0.166397869587
+                #pokeball: ITEM_POKE_BALL
+                #captured_cell_id: 6108423709528162304
+                #creation_time_ms: 1469364470778
+            	*/
+
+
+            for (var i in party) {
+                party[i].iv = (party[i].individual_attack + party[i].individual_defense + party[i].individual_stamina) / 45;
+
+
+                var content = document.createElement('div');
+                content.className = 'square hoverable';
+                content.id = party[i].id;
+
+                if (party[i].reqCandies == 0) {
+                    var candyString = party[i].candies + ' ' + ucFirst(party[i].candyFamily) + ' Candies';
+                } else {
+					
+                    var candyString = party[i].candies + '/' + party[i].reqCandies + ' ' + ucFirst(party[i].candyFamily) + ' Candies';
+                }
+                content.innerHTML = '<font face=arial size=4 color=navy> <center>' + party[i].cp + ' CP | ' + Math.round(party[i].iv * 100) + '% IV</b><img  src="static/avatars/' + party[i].favorite + '" width=30 height=29 style="float:right;display:inline;position:absolute;right:10px ;"></font><br><font face=arial style="font-size:11px;"><b>Atk: </b>' + party[i].individual_attack + '<b>&nbsp;&nbsp;&nbsp;Def: </b>' + party[i].individual_defense + '<b>&nbsp;&nbsp;&nbsp;Sta: </b>' + party[i].individual_stamina + '</font></center><center><img class="pokeSquare" style="padding:10px;" onclick=\"javascript:selectPoke(this);\" height=120 width=120 src=static/avatars/' + party[i].pokemon_id + '.png> </center>\
+	<font size=4 face=arial><center>' + ucFirst(party[i].pokemon_name) + '</font><br><progress style="height:10px;width:80%;" value=' + party[i].stamina +' max=' + party[i].stamina_max +'></progress><br><font size=2>HP ' + party[i].stamina + '/' + party[i].stamina_max + '</center><b>' + party[i].move_1 + '</b><b  style="float:right;padding-right:10px;">' + party[i].move_1_dmg + '</b><br><i>' + party[i].move_1_type + '<br></i><b>' + party[i].move_2 + '</b><b  style="float:right;padding-right:10px;">' + party[i].move_2_dmg + '</b><br><i>' + party[i].move_2_type + '<br><br></i><b><center><img style="display:inline;position:relative;bottom:5px;" width=20 height=20 src=static/avatars/candy.png><font style="position:relative;bottom:10px;margin-bottom:15px;" color=navy face=arial size=2>' + candyString + '</font><br></center></b>\
+	<br>'
+
+                if (document.getElementById('pokemonName').value != '') {
+
+                    if (document.getElementById('pokemonName').value.toUpperCase() == party[i].pokemon_name.toUpperCase()) {
+
+                        if (document.getElementById('ivThreshold').value != '') {
+                            if (party[i].iv * 100 >= parseInt(document.getElementById('ivThreshold').value) && party[i].cp >= parseInt(document.getElementById('cpThreshold').value))
+                                document.getElementById('inventory').appendChild(content);
+                            squareCount = squareCount + 1;
+                        } else {
+                            document.getElementById('inventory').appendChild(content);
+                            squareCount = squareCount + 1;
+                        }
+                    }
+                } else {
+
+                    if (document.getElementById('ivThreshold').value != '') {
+                        if (party[i].iv * 100 >= parseInt(document.getElementById('ivThreshold').value) && party[i].cp >= parseInt(document.getElementById('cpThreshold').value))
+                            document.getElementById('inventory').appendChild(content);
+                        squareCount = squareCount + 1;
+                    } else {
+                        document.getElementById('inventory').appendChild(content);
+                        squareCount = squareCount + 1;
+                    }
+
+                }
+            }
+
+            if (squareCount % 5 <= 2 || squareCount < 5) {
+                squareCount = (5 - (squareCount % 5)) + squareCount;
+
+                if (squareCount == 5) {
+                    document.getElementById('inventory').style.height = ((squareCount / 5) * 400) + 130
+                } else {
+                    document.getElementById('inventory').style.height = ((squareCount / 5) * 400);
+                }
+            } else if (squareCount == 5) {
+                document.getElementById('inventory').style.height = ((squareCount / 5) * 400) + 130
+            } else {
+                document.getElementById('inventory').style.height = ((squareCount / 5) * 400);
+            }
+
+
+
+
+            document.getElementById('pokemonName').value = "";
+            document.getElementById('ivThreshold').value = 0;
+            document.getElementById('cpThreshold').value = 0;
+
+
+        }
+
+        var origInventory = document.getElementById('inventory').innerHTML;
+        var url = "/static/inventory.json?" + new Date().getTime();
+        loadJSON(url,
+            function(data) {
+                sculpt(data);
+            },
+            function(xhr) {
+                console.error(xhr);
+            }
+        );
+
+        function selectAllPokes() {
+            selectedPokes = [];
+            var pokePokes = document.getElementsByClassName("pokeSquare");
+            for (var i = 0; i < pokePokes.length; i++) {
+                var id = pokePokes.item(i);
+                if (selectedPokes.indexOf(id.parentElement.parentElement.id) == -1) {
+                    pokePokes.item(i).click();
+
+                }
+
+
+            }
+
+        }
+        //let's clear some stuff
+        document.getElementById('pokemonName').value = "";
+        document.getElementById('ivThreshold').value = 0;
+        document.getElementById('cpThreshold').value = 0;
+    </script>
+
+</body>
+
+</html>
