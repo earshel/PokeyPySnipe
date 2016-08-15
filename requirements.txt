@@ -8,3 +8,4 @@ requests==2.10.0
 s2sphere==0.2.4
 gpxpy==1.1.1
 xxhash==0.6.1
+apscheduler==3.2.0
